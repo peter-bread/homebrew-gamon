@@ -9,6 +9,8 @@ class Gamon < Formula
     depends_on "go" => :build
     depends_on "gh"
     depends_on "yq"
+
+    conflicts_with "python-yq", because: "both install `yq` executables"
   
     def install
       system "go", "build", "-o", "#{bin}/gam", "."
@@ -31,6 +33,8 @@ class Gamon < Formula
           export GAM_REPO_ROOT_DIR=/path/to/value
   
         Replace /path/to/value with the actual value for GAM_REPO_ROOT_DIR.
+
+        It is important to note that this tool is run with the command `gam` and not `gamon`.
       EOS
     end
   
