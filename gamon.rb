@@ -10,7 +10,7 @@ class Gamon < Formula
     depends_on "gh"
     depends_on "yq"
 
-    conflicts_with "python-yq", because: "both install `yq` executables"
+    conflicts_with "python-yq", because: "both `yq` and `python-yq` install `yq` executables"
   
     def install
       system "go", "build", "-o", "#{bin}/gam", "."
