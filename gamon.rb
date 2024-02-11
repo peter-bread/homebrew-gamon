@@ -1,8 +1,8 @@
 class Gamon < Formula
     desc "GitHub Account Manager"
     homepage "https://github.com/peter-bread/gamon"
-    url "https://github.com/peter-bread/gamon/archive/refs/tags/v1.0.0.tar.gz"
-    sha256 "da442764c4f4f1dfa7f8c1b9fafe86d0b6ec6d0de9d0ed3721ab4fff96155b0e"
+    url "https://github.com/peter-bread/gamon/archive/refs/tags/v1.0.1.tar.gz"
+    sha256 "721bec19c4103012228d14c3d5028b54e13066c3bc7b5705ef14ecb2c71fbe0c"
     license "MIT"
     head "https://github.com/peter-bread/gamon.git", branch: "main"
   
