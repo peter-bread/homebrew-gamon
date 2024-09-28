@@ -8,21 +8,17 @@ class Gamon < Formula
 
   depends_on "go" => :build
   depends_on "gh"
-  depends_on "yq"
-
-  conflicts_with "python-yq", because: "both `yq` and `python-yq` install `yq` executables"
 
   def install
     system "go", "build", "-o", "#{bin}/gam", "."
 
     # Bash completions
     output = Utils.safe_popen_read("#{bin}/gam", "completion", "bash")
-    (bash_completion/"gam").write output
+    (bash_completion / "gam").write output
 
     # Zsh completions
     output = Utils.safe_popen_read("#{bin}/gam", "completion", "zsh")
-    (zsh_completion/"_gam").write output
-
+    (zsh_completion / "_gam").write output
   end
 
   def caveats
