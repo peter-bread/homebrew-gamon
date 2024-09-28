@@ -1,0 +1,41 @@
+---
+name: Update Formula
+
+on:
+  repository_dispatch:
+    types: [release]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    env:
+      SOFTWARE_USERNAME: peter-bread
+      SOFTWARE_REPO: gamon
+      FORMULA_NAME: gamon
+      VERSION: ${{ github.event.client_payload.version }}
+      CHECKSUM: ${{ github.event.client_payload.checksum }}
+
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+
+      - name: configure github actions bot
+        uses: peter-bread/setup-github-actions-bot@v1
+
+      - name: update formula
+        env:
+          BRANCH_NAME: update-${{ env.FORMULA_NAME }}-${{ env.VERSION }}
+          URL: https://github.com/${{ env.SOFTWARE_USERNAME }}/${{ env.SOFTWARE_REPO }}/archive/${{ env.VERSION }}.tar.gz
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git checkout -b "$BRANCH_NAME"
+          sed -i "s|^  url .*|  url \"$URL\"|" Formula/"$FORMULA_NAME".rb
+          sed -i "s|^  sha256 .*|  sha256 \"$CHECKSUM\"|" "Formula/$FORMULA_NAME.rb"
+          git commit -am "Update $FORMULA_NAME to $VERSION"
+          git push
+          sleep 5
+          gh pr create --title "Update $FORMULA_NAME to $VERSION" --body "This pull request updates the $FORMULA_NAME formula to version $VERSION. The formula file has been updated with the new version's URL and SHA-256 checksum." --base main --head update-"$FORMULA_NAME"-"$VERSION"
+
