@@ -31,6 +31,16 @@ class Gamon < Formula
       Replace /path/to/value with the actual value for GAM_REPO_ROOT_DIR.
 
       It is important to note that this tool is run with the command `gam` and not `gamon`.
+
+      To hook into your shell, add the following to your shell rc file:
+
+        source <(gam hook)
+
+          OR
+
+        eval "$(gam hook)"
+
+      WARNING: This only works properly for bash and zsh.
     EOS
   end
 
