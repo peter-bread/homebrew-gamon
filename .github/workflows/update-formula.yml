@@ -38,5 +38,9 @@ jobs:
           git commit -am "Update $FORMULA_NAME to $VERSION"
           git push origin "$BRANCH_NAME"
           sleep 5
-          gh pr create --title "Update $FORMULA_NAME to $VERSION" --body "This pull request updates the $FORMULA_NAME formula to version $VERSION. The formula file has been updated with the new version's URL and SHA-256 checksum." --base main --head update-"$FORMULA_NAME"-"$VERSION"
+          gh pr create \
+            --title "Update $FORMULA_NAME to $VERSION" \
+            --body "This pull request updates the $FORMULA_NAME formula to version $VERSION. The formula file has been updated with the new version's URL and SHA-256 checksum." \
+            --base main \
+            --head update-"$FORMULA_NAME"-"$VERSION"
 
