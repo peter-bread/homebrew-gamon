@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: configure github actions bot
-        uses: peter-bread/setup-github-actions-bot@v1
+        uses: peter-bread/setup-github-actions-bot@v2
 
       - name: update formula
         env:
